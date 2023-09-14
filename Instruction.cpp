@@ -1,4 +1,4 @@
-#include "Includes\Instruction.h"
+#include "Instruction.h"
 
 
 unsigned int GetMemory(unsigned int pointer, std::vector<unsigned char>& memory)
