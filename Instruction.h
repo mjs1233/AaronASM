@@ -77,8 +77,8 @@ E)Other
 
 using INSTRUCTION_FUNCTION = bool(*)(INSTRUCTION_BLOCK instruction,Register& reg, std::vector<unsigned char>& memory);
 
-inline unsigned int GetMemory(unsigned int pointer, std::vector<unsigned char>& memory);
-inline void SetMemory(unsigned int pointer, unsigned int value, std::vector<unsigned char>& memory);
+unsigned int GetMemory(unsigned int pointer, std::vector<unsigned char>& memory);
+void SetMemory(unsigned int pointer, unsigned int value, std::vector<unsigned char>& memory);
 
 
 bool LDR_M(INSTRUCTION_BLOCK instruction, Register& reg, std::vector<unsigned char>& memory);

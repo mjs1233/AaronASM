@@ -23,12 +23,11 @@ int main(void)
 {
 	_CPU.CPU_MODE = CPU::CPU_MODE::DEBUG_LOG;
 	//print_memory();
-	std::cout << "A";
 	INSTRUCTION_BLOCK inst;
 	inst.OpType = 1;
 	inst.OpCode = LDR;
 	inst.RegisterSelect = 0;
-	inst.Body = 0xFFFFFFF;
+	inst.Body = 0xFFFFF;
 	SetMemory(0x400, inst.DATA, _CPU.Memory);
 
 	inst.OpType = 1;

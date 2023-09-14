@@ -16,7 +16,7 @@ public:
 		DEBUG_LOG
 	};
 public:
-	Register Register;
+	Register Register_;
 	std::vector<unsigned char> Memory;
 	std::vector<std::vector<INSTRUCTION_FUNCTION>> Instructions;
 
@@ -28,8 +28,8 @@ public:
 	{
 		Memory.resize(MEMORY_SIZE);
 		Instructions.resize(64, std::vector<INSTRUCTION_FUNCTION>(4));
-		Register.PC = 0x400;
-		Register.SP = 0x10;
+		Register_.PC = 0x400;
+		Register_.SP = 0x10;
 
 		Instructions[LDR][0] = LDR_M;
 		Instructions[LDR][1] = LDR_I;
@@ -63,19 +63,19 @@ public:
 	bool Execute()
 	{
 		INSTRUCTION_BLOCK instruction;
-		instruction.DATA = GetMemory(Register.PC, Memory);
-		bool error_flag = Instructions[instruction.OpCode][instruction.OpType](instruction, Register, Memory);
+		instruction.DATA = GetMemory(Register_.PC, Memory);
+		bool error_flag = Instructions[instruction.OpCode][instruction.OpType](instruction, Register_, Memory);
 		if (!error_flag && CPU_MODE == CPU_MODE::DEBUG_LOG)
 		{
-			std::cout << "VM ERROR! error_flag enabled\nCUR PC: " + Register.PC << " PREV PC: " + PREV_PC << "\n";
+			std::cout << "VM ERROR! error_flag enabled\nCUR PC: " + Register_.PC << " PREV PC: " + PREV_PC << "\n";
 			if (instruction.OpCode == HLT)
 			{
 				return false;
 			}
-			std::cout << "VM ERROR! error_flag enabled\nCUR PC: " + Register.PC << " PREV PC: " + PREV_PC << "\n";
+			std::cout << "VM ERROR! error_flag enabled\nCUR PC: " + Register_.PC << " PREV PC: " + PREV_PC << "\n";
 		}
-		PREV_PC = Register.PC;
-		Register.PC += 4;
+		PREV_PC = Register_.PC;
+		Register_.PC += 4;
 		return true;
 	}
 

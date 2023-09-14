@@ -1,7 +1,7 @@
 #include "Instruction.h"
 
 
-inline unsigned int GetMemory(unsigned int pointer, std::vector<unsigned char>& memory)
+unsigned int GetMemory(unsigned int pointer, std::vector<unsigned char>& memory)
 {
 	unsigned int offset_0 = (unsigned int)memory[pointer];
 	unsigned int offset_1 = (unsigned int)memory[pointer + 1] << 8;
@@ -10,7 +10,7 @@ inline unsigned int GetMemory(unsigned int pointer, std::vector<unsigned char>& 
 	return offset_0 + offset_1 + offset_2 + offset_3;
 }
 
-inline void SetMemory(unsigned int pointer, unsigned int value, std::vector<unsigned char>& memory)
+void SetMemory(unsigned int pointer, unsigned int value, std::vector<unsigned char>& memory)
 {
 	memory[pointer] = (unsigned char)value;
 	memory[pointer + 1] = (unsigned char)(value >> 8);
