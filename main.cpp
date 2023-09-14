@@ -23,7 +23,7 @@ int main(void)
 {
 	_CPU.CPU_MODE = CPU::CPU_MODE::DEBUG_LOG;
 	//print_memory();
-
+	std::cout << "A";
 	INSTRUCTION_BLOCK inst;
 	inst.OpType = 1;
 	inst.OpCode = LDR;
