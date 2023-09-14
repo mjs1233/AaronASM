@@ -2,12 +2,14 @@
     "tasks": [
         {
             "type": "cppbuild",
-            "label": "C/C++: g++ build active file",
+            "label": "shell",
             "command": "/usr/bin/g++",
             "args": [
                 "-fdiagnostics-color=always",
+                "-I",
+                "${fileDirname}\\Includes",
                 "-g",
-                "${file}",
+                "${fileDirname}/*.cpp",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
             ],
