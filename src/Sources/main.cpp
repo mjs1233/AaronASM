@@ -21,6 +21,8 @@ void print_memory(unsigned int start = 0, unsigned int end = 1048575)
 
 int main(void)
 {
+	std::cout << "TEST BUILD!\n\n\n";
+
 	_CPU.CPU_MODE = CPU::CPU_MODE::DEBUG_LOG;
 	//print_memory();
 	INSTRUCTION_BLOCK inst;

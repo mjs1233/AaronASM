@@ -7,10 +7,11 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-I",
-                "${fileDirname}\\Includes",
+                "${fileDirname}/*.h",
                 "-g",
                 "${fileDirname}/*.cpp",
                 "-o",
+                "Aaron",
                 "${fileDirname}/${fileBasenameNoExtension}"
             ],
             "options": {

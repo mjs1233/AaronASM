@@ -15,7 +15,10 @@ void SetRegister(Register& reg,unsigned char register_select,unsigned int value)
 	case 0b10:
 		reg.Y = value;
 		break;
+	default:
+		break;
 	};
+	return;
 }
 
 
@@ -33,6 +36,8 @@ unsigned int GetRegister(Register& reg, unsigned char register_select)
 
 	case 0b10:
 		return reg.Y;
+		break;
+	default:
 		break;
 	};
 }
