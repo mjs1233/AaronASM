@@ -7,12 +7,11 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-I",
-                "${fileDirname}/*.h",
+                "${workspaceFolder}/src/Includes/*.h",
                 "-g",
-                "${fileDirname}/*.cpp",
+                "${workspaceFolder}/src/Sources/*.cpp", 
                 "-o",
-                "Aaron",
-                "${fileDirname}/${fileBasenameNoExtension}"
+                "${workspaceFolder}/src/Sources/${fileBasenameNoExtension}"
             ],
             "options": {
                 "cwd": "${fileDirname}"
