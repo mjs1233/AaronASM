@@ -67,7 +67,7 @@ public:
 		bool error_flag = Instructions[instruction.OpCode][instruction.OpType](instruction, Register_, Memory);
 		if (!error_flag && CPU_MODE == CPU_MODE::DEBUG_LOG)
 		{
-			std::cout << "VM ERROR! error_flag enabled\nCUR PC: " + Register_.PC << " PREV PC: " + PREV_PC << "\n";
+			//std::cout << "VM ERROR! error_flag enabled\nCUR PC: " + Register_.PC << " PREV PC: " + PREV_PC << "\n";
 			if (instruction.OpCode == HLT)
 			{
 				return false;
