@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include "CPU.h"
+#include "../Includes/CPU.h"
 
 CPU _CPU;
 
