@@ -11,7 +11,7 @@
                 "-g",
                 "${workspaceFolder}/src/Sources/*.cpp", 
                 "-o",
-                "${workspaceFolder}/src/Sources/${fileBasenameNoExtension}"
+                "${workspaceFolder}/src/Sources/${fileBasenameNoExtension}",
             ],
             "options": {
                 "cwd": "${fileDirname}"

@@ -75,7 +75,7 @@ int main(void)
 		//std::cout << "SP: " << _CPU.Register.PC << "\n";
 	}
 	double dur = (double)(clock() - s);
-	std::cout << "RUN TIME : " << (double)dur << " || " << cycle << " cycle";
+	std::cout << "RUN TIME : " << (double)dur << " || " << cycle << " cycle\n";
 	//print_memory(0x400, 0x501);
 
 	return 0;
