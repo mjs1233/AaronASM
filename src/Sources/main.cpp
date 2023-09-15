@@ -1,8 +1,10 @@
 #include <iostream>
 #include <vector>
+#include <string>
 #include "../Includes/CPU.h"
 
 CPU _CPU;
+std::string target_path = "";
 
 
 void print_memory(unsigned int start = 0, unsigned int end = 1048575)
@@ -19,11 +21,47 @@ void print_memory(unsigned int start = 0, unsigned int end = 1048575)
 	}
 }
 
-int main(void)
+int main(int argc,char** argv)
 {
-	std::cout << "TEST BUILD!\n\n\n";
+	std::cout << "TEST BUILD!\n";
 
-	_CPU.CPU_MODE = CPU::CPU_MODE::DEBUG_LOG;
+
+	if(argc < 2)
+		return 0;
+
+	for(int i = 1; i < argc; i++)
+	{
+		std::string cmd = argv[i];
+		if(cmd == "-m")
+		{
+			if(i + 1 >= argc)
+				return 0;
+			
+			std::string mode = argv[i + 1];
+			if(mode == "DEBUG")
+			{
+				_CPU.CPU_MODE = CPU::CPU_MODE::DEBUG_LOG;
+				std::cout << "CPU RUN DEBUG MODE\n";
+			}
+			else if(mode == "REAL")
+			{
+				_CPU.CPU_MODE = CPU::CPU_MODE::REAL;
+				std::cout << "CPU RUN REAL MODE\n";
+			}
+			else
+				return 0;
+		}
+		if(cmd == "-t")
+		{
+			if(i + 1 >= argc)
+				return 0;
+			
+			std::string path = argv[i + 1];
+			target_path = path;
+			std::cout << "EXECUTE ROM=" << target_path << "\n";
+		}
+	}
+
 	//print_memory();
 	INSTRUCTION_BLOCK inst;
 	inst.OpType = 1;
@@ -66,7 +104,6 @@ int main(void)
 
 
 	//print_memory(0x400, 0x501);
-	std::cout << "S\n";
 	clock_t s = clock();
 	int cycle = 0;
 	while (_CPU.Execute())
