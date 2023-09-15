@@ -40,4 +40,5 @@ unsigned int GetRegister(Register& reg, unsigned char register_select)
 	default:
 		break;
 	};
+	return 0;
 }
