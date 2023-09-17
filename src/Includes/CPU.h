@@ -20,7 +20,10 @@ public:
 	std::vector<unsigned char> Memory;
 	std::vector<std::vector<INSTRUCTION_FUNCTION>> Instructions;
 
-	const int MEMORY_SIZE = 1048575;
+	const int MEMORY_SIZE = 0xFFFFF;
+	const int RAM_SIZE = 0x7FFFF;
+	const int ROM_OFFSET = 0x80000;
+	const int ROM_SIZE = 0x7FFFF;
 	CPU_MODE CPU_MODE = CPU_MODE::DEBUG_LOG;
 	unsigned int PREV_PC = 0x400;
 
@@ -95,6 +98,19 @@ public:
 
 	}
 
+	bool CPU_INIT(std::vector<unsigned char>& rom_data)
+	{
+		for(int i = 0; i < _CPU.ROM_SIZE; i++)
+		{
+			_CPU.Memory[ROM_OFFSET + i] = rom_data[i];
+		}
+		//reset register
+		Register_.A = 0;
+		Register_.X = 0;
+		Register_.Y = 0;
+		Register_.SP = 0;
+	}
+
 	bool Execute()
 	{
 		INSTRUCTION_BLOCK instruction;
@@ -102,7 +118,6 @@ public:
 		bool error_flag = Instructions[instruction.OpCode][instruction.OpType](instruction, Register_, Memory);
 		if (!error_flag && CPU_MODE == CPU_MODE::DEBUG_LOG)
 		{
-			//std::cout << "VM ERROR! error_flag enabled\nCUR PC: " + Register_.PC << " PREV PC: " + PREV_PC << "\n";
 			if (instruction.OpCode == HLT)
 			{
 				return false;

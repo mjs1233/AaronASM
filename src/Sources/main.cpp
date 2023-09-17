@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <fstream>
 #include "../Includes/CPU.h"
 
 CPU _CPU;
@@ -21,6 +22,26 @@ void print_memory(unsigned int start = 0, unsigned int end = 1048575)
 	}
 }
 
+bool load_rom_data(std::string path,std::vector<unsigned char>& data)
+{
+	std::ifstream file(path, std::ifstream::binary);
+	if (file) {
+		file.seekg(0, file.end);
+		int length = (int)file.tellg();
+		file.seekg(0, file.beg);
+
+		unsigned char * buffer = (unsigned char*)malloc(length);
+
+		file.read((char*)buffer, length);
+		file.close();
+
+		data.resize(length,*buffer);
+		return true;
+	}
+	else
+		return false;
+}
+
 int main(int argc,char** argv)
 {
 	std::cout << "TEST BUILD!\n";
@@ -29,7 +50,11 @@ int main(int argc,char** argv)
 	if(argc < 2)
 		return 0;
 
-	for(int i = 1; i < argc; i++)
+	std::string path = argv[1];
+	target_path = path;
+	std::cout << "EXECUTE ROM=" << target_path << "\n";
+
+	for(int i = 2; i < argc; i++)
 	{
 		std::string cmd = argv[i];
 		if(cmd == "-m")
@@ -51,16 +76,14 @@ int main(int argc,char** argv)
 			else
 				return 0;
 		}
-		if(cmd == "-t")
-		{
-			if(i + 1 >= argc)
-				return 0;
-			
-			std::string path = argv[i + 1];
-			target_path = path;
-			std::cout << "EXECUTE ROM=" << target_path << "\n";
-		}
 	}
+
+	std::vector<unsigned char> rom;
+
+	bool load_result = load_rom_data(target_path,rom);
+
+	if(!load_result && rom.size() != _CPU.ROM_SIZE)
+		return 0;
 
 	//print_memory();
 	INSTRUCTION_BLOCK inst;
