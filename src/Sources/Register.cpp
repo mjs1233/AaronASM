@@ -15,6 +15,10 @@ void SetRegister(Register& reg,unsigned char register_select,unsigned int value)
 	case 0b10:
 		reg.Y = value;
 		break;
+
+	case 0b11:
+		reg.I = value;
+		break;
 	default:
 		break;
 	};

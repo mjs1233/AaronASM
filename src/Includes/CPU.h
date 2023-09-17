@@ -42,21 +42,56 @@ public:
 		Instructions[SUB][0] = SUB_M;
 		Instructions[SUB][1] = SUB_I;
 
+		Instructions[MUL][0] = MUL_M;
+		Instructions[MUL][1] = MUL_I;
+
+		Instructions[DIV][0] = DIV_M;
+		Instructions[DIV][1] = DIV_I;
+		
+		Instructions[RMD][0] = RMD_M;
+		Instructions[RMD][1] = RMD_I;
+	
+		Instructions[SFL][0] = SFL_M;
+		Instructions[SFL][1] = SFL_I;
+		
+		Instructions[SFR][0] = SFR_M;
+		Instructions[SFR][1] = SFR_I;
+
+		Instructions[OR][0] = OR_M;
+		Instructions[OR][1] = OR_I;
+
+		Instructions[AND][0] = AND_M;
+		Instructions[AND][1] = AND_I;
+
+		Instructions[XOR][0] = XOR_M;
+		Instructions[XOR][1] = XOR_I;
+
+		Instructions[NOT][2] = NOT_;
+
+	
 		Instructions[JMP][0] = JMP_M;
 		Instructions[JMP][1] = JMP_I;
-
+		
 		Instructions[JPZ][0] = JPZ_M;
 		Instructions[JPZ][1] = JPZ_I;
+		
+		Instructions[JPN][0] = JPN_M;
+		Instructions[JPN][1] = JPN_I;
 
-		Instructions[BRC][0] = BRC_M;
-		Instructions[BRC][1] = BRC_I;
+		Instructions[RET][2] = RET_;
+
+		Instructions[BRH][0] = BRH_M;
+		Instructions[BRH][1] = BRH_I;
 
 		Instructions[BRZ][0] = BRZ_M;
 		Instructions[BRZ][1] = BRZ_I;
 
-		Instructions[RET][2] = RET_;
+
+		Instructions[NOP][2] = NOP_;
 
 		Instructions[HLT][2] = HLT_;
+
+		Instructions[HLT][2] = CLS_;
 
 	}
 

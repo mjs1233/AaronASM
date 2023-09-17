@@ -81,7 +81,7 @@ int main(int argc,char** argv)
 	inst.Body = 1;
 	SetMemory(0x400 + 8, inst.DATA, _CPU.Memory);
 	inst.OpType = 1;
-	inst.OpCode = BRC;
+	inst.OpCode = BRH;
 	inst.RegisterSelect = 0;
 	inst.Body = 0x400;
 	SetMemory(0x400 + 12, inst.DATA, _CPU.Memory);

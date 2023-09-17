@@ -5,6 +5,7 @@ struct Register
 	unsigned int A = 0;
 	unsigned int X = 0;
 	unsigned int Y = 0;
+	unsigned int I = 0;//interrupt jump target
 	unsigned int PC = 0;
 	unsigned char SP = 0;
 	unsigned char ZR : 1;

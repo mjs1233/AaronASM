@@ -50,6 +50,7 @@ E)Other
 #define SUB 6
 #define MUL 7
 #define DIV 8
+#define RMD 9
 
 #define SFL 10
 #define SFR 11
@@ -61,14 +62,15 @@ E)Other
 #define JMP 20
 #define JPZ 21
 #define JPN 22
-#define JPO 23
-#define JPC 24
+#define JPO 23//x
+#define JPC 24//x
 #define RET 25
-#define BRC 26
+#define BRH 26
 #define BRZ 27
 
 #define NOP 60
 #define HLT 61
+#define CLS 62
 
 
 #include <vector>
@@ -93,6 +95,33 @@ bool ADD_I(INSTRUCTION_BLOCK instruction, Register& reg, std::vector<unsigned ch
 bool SUB_M(INSTRUCTION_BLOCK instruction, Register& reg, std::vector<unsigned char>& memory);
 bool SUB_I(INSTRUCTION_BLOCK instruction, Register& reg, std::vector<unsigned char>& memory);
 
+bool MUL_M(INSTRUCTION_BLOCK instruction, Register& reg, std::vector<unsigned char>& memory);
+bool MUL_I(INSTRUCTION_BLOCK instruction, Register& reg, std::vector<unsigned char>& memory);
+
+bool DIV_M(INSTRUCTION_BLOCK instruction, Register& reg, std::vector<unsigned char>& memory);
+bool DIV_I(INSTRUCTION_BLOCK instruction, Register& reg, std::vector<unsigned char>& memory);
+
+bool RMD_M(INSTRUCTION_BLOCK instruction, Register& reg, std::vector<unsigned char>& memory);
+bool RMD_I(INSTRUCTION_BLOCK instruction, Register& reg, std::vector<unsigned char>& memory);
+
+
+bool SFL_M(INSTRUCTION_BLOCK instruction, Register& reg, std::vector<unsigned char>& memory);
+bool SFL_I(INSTRUCTION_BLOCK instruction, Register& reg, std::vector<unsigned char>& memory);
+
+bool SFR_M(INSTRUCTION_BLOCK instruction, Register& reg, std::vector<unsigned char>& memory);
+bool SFR_I(INSTRUCTION_BLOCK instruction, Register& reg, std::vector<unsigned char>& memory);
+
+bool OR_M(INSTRUCTION_BLOCK instruction, Register& reg, std::vector<unsigned char>& memory);
+bool OR_I(INSTRUCTION_BLOCK instruction, Register& reg, std::vector<unsigned char>& memory);
+
+bool AND_M(INSTRUCTION_BLOCK instruction, Register& reg, std::vector<unsigned char>& memory);
+bool AND_I(INSTRUCTION_BLOCK instruction, Register& reg, std::vector<unsigned char>& memory);
+
+bool XOR_M(INSTRUCTION_BLOCK instruction, Register& reg, std::vector<unsigned char>& memory);
+bool XOR_I(INSTRUCTION_BLOCK instruction, Register& reg, std::vector<unsigned char>& memory);
+
+bool NOT_(INSTRUCTION_BLOCK instruction, Register& reg, std::vector<unsigned char>& memory);
+
 
 bool JMP_M(INSTRUCTION_BLOCK instruction, Register& reg, std::vector<unsigned char>& memory);
 bool JMP_I(INSTRUCTION_BLOCK instruction, Register& reg, std::vector<unsigned char>& memory);
@@ -100,12 +129,19 @@ bool JMP_I(INSTRUCTION_BLOCK instruction, Register& reg, std::vector<unsigned ch
 bool JPZ_M(INSTRUCTION_BLOCK instruction, Register& reg, std::vector<unsigned char>& memory);
 bool JPZ_I(INSTRUCTION_BLOCK instruction, Register& reg, std::vector<unsigned char>& memory);
 
+bool JPN_M(INSTRUCTION_BLOCK instruction, Register& reg, std::vector<unsigned char>& memory);
+bool JPN_I(INSTRUCTION_BLOCK instruction, Register& reg, std::vector<unsigned char>& memory);
+
 bool RET_(INSTRUCTION_BLOCK instruction, Register& reg, std::vector<unsigned char>& memory);
 
-bool BRC_M(INSTRUCTION_BLOCK instruction, Register& reg, std::vector<unsigned char>& memory);
-bool BRC_I(INSTRUCTION_BLOCK instruction, Register& reg, std::vector<unsigned char>& memory);
+bool BRH_M(INSTRUCTION_BLOCK instruction, Register& reg, std::vector<unsigned char>& memory);
+bool BRH_I(INSTRUCTION_BLOCK instruction, Register& reg, std::vector<unsigned char>& memory);
 
 bool BRZ_M(INSTRUCTION_BLOCK instruction, Register& reg, std::vector<unsigned char>& memory);
 bool BRZ_I(INSTRUCTION_BLOCK instruction, Register& reg, std::vector<unsigned char>& memory);
 
+bool NOP_(INSTRUCTION_BLOCK instruction, Register& reg, std::vector<unsigned char>& memory);
+
 bool HLT_(INSTRUCTION_BLOCK instruction, Register& reg, std::vector<unsigned char>& memory);
+
+bool CLS_(INSTRUCTION_BLOCK instruction, Register& reg, std::vector<unsigned char>& memory);
