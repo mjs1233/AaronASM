@@ -100,9 +100,9 @@ public:
 
 	bool CPU_INIT(std::vector<unsigned char>& rom_data)
 	{
-		for(int i = 0; i < _CPU.ROM_SIZE; i++)
+		for(int i = 0; i < ROM_SIZE; i++)
 		{
-			_CPU.Memory[ROM_OFFSET + i] = rom_data[i];
+			Memory[ROM_OFFSET + i] = rom_data[i];
 		}
 		//reset register
 		Register_.A = 0;
