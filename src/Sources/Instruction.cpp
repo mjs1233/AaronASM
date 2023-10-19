@@ -356,7 +356,7 @@ bool JMP_M(INSTRUCTION_BLOCK instruction, Register& reg, std::vector<unsigned ch
 	unsigned int sub_pc = GetMemory(target_addr, memory);
 	SetMemory(reg.SP, reg.PC, memory);
 	reg.SP += 4;
-	reg.PC = sub_pc;
+	reg.PC = sub_pc-4;
 	return true;
 }
 
@@ -368,7 +368,7 @@ bool JMP_I(INSTRUCTION_BLOCK instruction, Register& reg, std::vector<unsigned ch
 	unsigned int sub_pc = instruction.Body;
 	SetMemory(reg.SP, reg.PC, memory);
 	reg.SP += 4;
-	reg.PC = sub_pc;
+	reg.PC = sub_pc-4;
 	return true;
 }
 
@@ -384,7 +384,7 @@ bool JPZ_M(INSTRUCTION_BLOCK instruction, Register& reg, std::vector<unsigned ch
 	unsigned int sub_pc = GetMemory(target_addr, memory);
 	SetMemory(reg.SP, reg.PC, memory);
 	reg.SP += 4;
-	reg.PC = sub_pc;
+	reg.PC = sub_pc-4;
 	return true;
 }
 
@@ -399,7 +399,7 @@ bool JPZ_I(INSTRUCTION_BLOCK instruction, Register& reg, std::vector<unsigned ch
 	unsigned int sub_pc = instruction.Body;
 	SetMemory(reg.SP, reg.PC, memory);
 	reg.SP += 4;
-	reg.PC = sub_pc;
+	reg.PC = sub_pc-4;
 	return true;
 }
 
@@ -415,7 +415,7 @@ bool JPN_M(INSTRUCTION_BLOCK instruction, Register& reg, std::vector<unsigned ch
 	unsigned int sub_pc = GetMemory(target_addr, memory);
 	SetMemory(reg.SP, reg.PC, memory);
 	reg.SP += 4;
-	reg.PC = sub_pc;
+	reg.PC = sub_pc-4;
 	return true;
 }
 
@@ -430,7 +430,7 @@ bool JPN_I(INSTRUCTION_BLOCK instruction, Register& reg, std::vector<unsigned ch
 	unsigned int sub_pc = instruction.Body;
 	SetMemory(reg.SP, reg.PC, memory);
 	reg.SP += 4;
-	reg.PC = sub_pc;
+	reg.PC = sub_pc-4;
 	return true;
 }
 
@@ -442,7 +442,7 @@ bool RET_(INSTRUCTION_BLOCK instruction, Register& reg, std::vector<unsigned cha
 	reg.SP -= 4;
 	unsigned int prev_pc = GetMemory(reg.SP, memory);
 	SetMemory(reg.SP, 0, memory);
-	reg.PC = prev_pc;
+	reg.PC = prev_pc-4;
 	return true;
 }
 
@@ -451,7 +451,7 @@ bool BRH_M(INSTRUCTION_BLOCK instruction, Register& reg, std::vector<unsigned ch
 {
 	unsigned int target_addr = instruction.Body;
 	unsigned int brh_pc = GetMemory(target_addr, memory);
-	reg.PC = brh_pc;
+	reg.PC = brh_pc-4;
 	return true;
 }
 
@@ -459,7 +459,7 @@ bool BRH_M(INSTRUCTION_BLOCK instruction, Register& reg, std::vector<unsigned ch
 bool BRH_I(INSTRUCTION_BLOCK instruction, Register& reg, std::vector<unsigned char>& memory)
 {
 	unsigned int brh_pc = instruction.Body;
-	reg.PC = brh_pc;
+	reg.PC = brh_pc-4;
 	return true;
 }
 
@@ -469,7 +469,7 @@ bool BRZ_M(INSTRUCTION_BLOCK instruction, Register& reg, std::vector<unsigned ch
 		return true;
 	unsigned int target_addr = instruction.Body;
 	unsigned int brh_pc = GetMemory(target_addr, memory);
-	reg.PC = brh_pc;
+	reg.PC = brh_pc-4;
 	return true;
 }
 
@@ -478,7 +478,7 @@ bool BRZ_I(INSTRUCTION_BLOCK instruction, Register& reg, std::vector<unsigned ch
 	if (!reg.ZR)
 		return true;
 	unsigned int brh_pc = instruction.Body;
-	reg.PC = brh_pc;
+	reg.PC = brh_pc-4;
 	return true;
 }
 

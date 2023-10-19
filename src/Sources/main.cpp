@@ -34,8 +34,13 @@ bool load_rom_data(std::string path,std::vector<unsigned char>& data)
 
 		file.read((char*)buffer, length);
 		file.close();
+		data.resize(length);
+		for(int i = 0; i < length; i++)
+		{
+			data[i] = buffer[i];
+		}
 
-		data.resize(length,*buffer);
+		free(buffer);
 		return true;
 	}
 	else
@@ -85,54 +90,19 @@ int main(int argc,char** argv)
 	if(!load_result && rom.size() != _CPU.ROM_SIZE)
 		return 0;
 
+	_CPU.CPU_INIT(rom);
 	//print_memory();
-	INSTRUCTION_BLOCK inst;
-	inst.OpType = 1;
-	inst.OpCode = LDR;
-	inst.RegisterSelect = 0;
-	inst.Body = 0xFFFFF;
-	SetMemory(0x400, inst.DATA, _CPU.Memory);
 
-	inst.OpType = 1;
-	inst.OpCode =  BRZ;
-	inst.RegisterSelect = 0;
-	inst.Body = 0x400+28;
-	SetMemory(0x400 + 4, inst.DATA, _CPU.Memory);
-	inst.OpType = 1;
-	inst.OpCode = SUB;
-	inst.RegisterSelect = 0;
-	inst.Body = 1;
-	SetMemory(0x400 + 8, inst.DATA, _CPU.Memory);
-	inst.OpType = 1;
-	inst.OpCode = BRH;
-	inst.RegisterSelect = 0;
-	inst.Body = 0x400;
-	SetMemory(0x400 + 12, inst.DATA, _CPU.Memory);
-
-	inst.OpType = 1;
-	inst.OpCode = LDR;
-	inst.RegisterSelect = 0;
-	inst.Body = 0xF;
-	SetMemory(0x400 + 32, inst.DATA, _CPU.Memory);
-	inst.OpType = 1;
-	inst.OpCode = STR;
-	inst.RegisterSelect = 0;
-	inst.Body = 0x500;
-	SetMemory(0x400 + 36, inst.DATA, _CPU.Memory);
-	inst.OpType = 2;
-	inst.OpCode = HLT;
-	inst.RegisterSelect = 0;
-	inst.Body = 0;
-	SetMemory(0x400 + 40, inst.DATA, _CPU.Memory);
-
-
-	//print_memory(0x400, 0x501);
 	clock_t s = clock();
 	int cycle = 0;
 	while (_CPU.Execute())
 	{
 		cycle++;
-		//std::cout << "SP: " << _CPU.Register.PC << "\n";
+		std::cout << "CYCLE " << cycle << "\n";
+		if(cycle == 30)
+		{
+			break;
+		}
 	}
 	double dur = (double)(clock() - s);
 	std::cout << "RUN TIME : " << (double)dur << " || " << cycle << " cycle\n";

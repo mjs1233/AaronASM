@@ -94,7 +94,7 @@ public:
 
 		Instructions[HLT][2] = HLT_;
 
-		Instructions[HLT][2] = CLS_;
+		Instructions[CLS][2] = CLS_;
 
 	}
 
@@ -102,19 +102,27 @@ public:
 	{
 		for(int i = 0; i < ROM_SIZE; i++)
 		{
-			Memory[ROM_OFFSET + i] = rom_data[i];
+			Memory[i] = rom_data[i];
+			if(rom_data[i] != 0)
+			{
+				std::cout << i << " " << rom_data[i] << "\n";
+			}
 		}
 		//reset register
 		Register_.A = 0;
 		Register_.X = 0;
 		Register_.Y = 0;
-		Register_.SP = 0;
+		Register_.SP = 0x400;
 	}
 
 	bool Execute()
 	{
 		INSTRUCTION_BLOCK instruction;
 		instruction.DATA = GetMemory(Register_.PC, Memory);
+		if(CPU_MODE == CPU_MODE::DEBUG_LOG)
+		{
+			std::cout << "CPU RUN STATE |A " << Register_.A << "|X " << Register_.X << "|Y " << Register_.Y <<"|st zr: " << (int)Register_.ZR << "|S " << Register_.PC << "|>>" << instruction.OpCode << "|" << instruction.OpType << "\n";
+		}
 		bool error_flag = Instructions[instruction.OpCode][instruction.OpType](instruction, Register_, Memory);
 		if (!error_flag && CPU_MODE == CPU_MODE::DEBUG_LOG)
 		{
@@ -124,10 +132,11 @@ public:
 			}
 			std::cout << "VM ERROR! error_flag enabled\nCUR PC: " + Register_.PC << " PREV PC: " + PREV_PC << "\n";
 		}
+		
+
 		PREV_PC = Register_.PC;
 		Register_.PC += 4;
 		return true;
 	}
-
 };
 
